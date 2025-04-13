@@ -1,10 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #a1d4b1;
-  --foreground: #8c0027;
-  --link-color: #2baf90;
-  
+  --background: #F6DCAC;
+  --foreground: #01204E;
+  --link-color: #028391;
+  --primary-color: #FAA968;
+  --secondary-color: #F85525;
+  --text-color: #0e0e0e;
+  --accent-color: #2BAF90;
 }
 
 @theme inline {
@@ -30,4 +33,46 @@ body {
 a {
   color: var(--link-color);
 }
+
+.button {
+  color: var(--text-color);
+  background-color: var(--primary-color);
+}
+
+
+.background-images {
+  background-image: url('/fruitvale_bart.jpg');
+  background-size: cover; /* Adjust sizes as needed */
+  background-position: center; /* Center each image */
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 60%;
+  }
+}
+
+@keyframes blink {
+  70% {
+    border-color: transparent;
+  }
+}
+
+.typing-animation {
+  display: inline-block;
+  overflow: hidden; /* Ensures the text is hidden until revealed */
+  white-space: nowrap; /* Prevents text from wrapping */
+  border-right: 2px solid var(--text-color); /* Creates a cursor effect */
+  animation: typing 4s steps(30, end), blink 0.75s step-end infinite; /* Typing and blinking animations */
+  font-size: 4rem; /* Adjust font size as needed */
+  color: var(--text-color); /* Use your text color variable */
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  
+}
+
 
