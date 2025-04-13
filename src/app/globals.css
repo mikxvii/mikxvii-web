@@ -63,7 +63,7 @@ a {
 
 .typing-animation {
   display: inline-block;
-  overflow: hidden; /* Ensures the text is hidden until revealed */
+  /* overflow: hidden; Ensures the text is hidden until revealed */
   white-space: nowrap; /* Prevents text from wrapping */
   border-right: 2px solid var(--text-color); /* Creates a cursor effect */
   animation: typing 4s steps(30, end), blink 0.75s step-end infinite; /* Typing and blinking animations */
@@ -72,7 +72,11 @@ a {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   text-align: center;
-  
+
 }
 
-
+.hover-secondary-color:hover {
+  color: var(--secondary-color); /* Use the secondary color variable */
+  text-shadow: 0 0 5px var(--secondary-color), 0 0 10px var(--secondary-color), 0 0 15px var(--secondary-color);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
