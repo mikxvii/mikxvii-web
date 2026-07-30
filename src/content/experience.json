@@ -1,0 +1,90 @@
+[
+  {
+    "date": "2026-05",
+    "role": "AI Evaluation Engineer",
+    "org": "DataAnnotation",
+    "location": "Remote",
+    "points": [
+      "Evaluated and enhanced AI coding agents by designing adversarial test cases and assessing tool-use accuracy in multi-step workflows.",
+      "Conducted comparative analyses of frontier models across large-scale production codebases in TypeScript, Python, and Flutter.",
+      "Authored technical rating rationale distinguishing model behavioral failures from infrastructure issues.",
+      "Wrote agentic coding training tasks and evaluation rubrics for Gen AI models, benchmarking model performance."
+    ],
+    "tags": ["AI evals", "TypeScript", "Python", "Flutter"]
+  },
+  {
+    "date": "2025-08",
+    "role": "President",
+    "org": "Mobile Developers of Berkeley",
+    "location": "Berkeley, CA",
+    "points": [
+      "Oversaw club operations and strategic initiatives, driving organizational growth and collaboration among 50+ members.",
+      "Spearheaded the executive team of VPs, facilitating cross-functional coordination across 5 departments and 13 clubs.",
+      "Spoke at cross-club, campus-wide tech events to share the club vision and connect with prospective members.",
+      "Led brand design for the Spring/Fall 2025 recruitment campaign (+25% social media presence) and reviewed 400+ applications with behavioral and technical interviews."
+    ],
+    "tags": ["Leadership", "Mobile", "Design"]
+  },
+  {
+    "date": "2025-06",
+    "role": "Full Stack Engineer, Project Manager",
+    "org": "Circuit",
+    "location": "Berkeley, CA",
+    "points": [
+      "Built 5 admin dashboards (events, users, coupons, analytics, business) integrating Remo API, Firebase Secrets, and Google Analytics — cutting manual ops overhead by 90%.",
+      "Deployed the Circuit MVP to production on Vercel with CI/CD pipelines and real-time uptime monitoring for 50+ early adopters.",
+      "Led 3 full-stack engineers and 1 designer through Agile sprints, managing 60+ PR reviews and driving a 60% increase in team velocity.",
+      "Authored technical requirements and sprint backlogs in Notion, mentoring junior developers through code review and architecture feedback."
+    ],
+    "tags": ["Next.js", "Firebase", "Vercel", "Agile"]
+  },
+  {
+    "date": "2025-01",
+    "role": "Mobile/AI Engineering Intern",
+    "org": "Athena AI Life Advisor",
+    "location": "San Jose, CA",
+    "points": [
+      "Developed a user feedback system surfacing insights to product, engineering, and leadership, improving GenAI responses for 25k active users.",
+      "Delivered Speech-to-Text / Text-to-Speech chat features via React Native and Google Cloud, improving 1M+ Athena AI responses.",
+      "Built a React Native chat enhancement with a personalized intro message, improving onboarding and engagement for 100k registered users.",
+      "Contributed to AI-powered chat enhancements through UX and feature-development discussions."
+    ],
+    "tags": ["React Native", "OpenAI API", "Google Cloud"]
+  },
+  {
+    "date": "2024-08",
+    "role": "Event and Admin Assistant, Dean's Office",
+    "org": "UC Berkeley CDSS",
+    "location": "Berkeley, CA",
+    "points": [
+      "Developed an Event Space Guide covering 200+ spaces, enhancing accessibility for 9 CDSS affiliate departments.",
+      "Wrote an 8-page training document for the first-ever office assistant role at the new College of Computing, Data Science, and Society.",
+      "Shared responsibility for the Events and Commencement departmental inboxes."
+    ],
+    "tags": ["Operations", "Events", "Documentation"]
+  },
+  {
+    "date": "2024-08",
+    "role": "Full Stack Engineer",
+    "org": "Salamati",
+    "location": "Berkeley, CA",
+    "points": [
+      "Engineered a One Time Password login flow and password reset feature, improving app speed and security by 95% for 150k+ Afghan women on a UN-backed project.",
+      "Built the flow on a TypeScript / React Native frontend with email-based Supabase Authentication.",
+      "Developed account deletion functionality for privacy compliance, with confirmation flows and Supabase Edge Functions handling automated backend cleanup."
+    ],
+    "tags": ["TypeScript", "React Native", "Supabase"]
+  },
+  {
+    "date": "2024-01",
+    "role": "VP of Marketing",
+    "org": "Mobile Developers of Berkeley",
+    "location": "Berkeley, CA",
+    "points": [
+      "Applied TypeScript, React Native, JavaScript, CSS, and Git across 4 app development projects.",
+      "Reviewed 120+ applications for the Fall 2024 recruitment process, interviewing and assessing candidates.",
+      "Reframed authentication procedures — OTP login, password reset, account deletion — and helped test and publish Salamati."
+    ],
+    "tags": ["React Native", "TypeScript", "Marketing"]
+  }
+]

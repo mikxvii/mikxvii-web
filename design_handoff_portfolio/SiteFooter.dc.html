@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./ds-base.js"></script>
+<style>
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--link-hover)}
+</style>
+</helmet>
+<div style="font-family:var(--font-sans)">
+  <section style="max-width:1088px;margin:0 auto;padding:26px 24px 84px">
+    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:26px">
+      <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-faint)">{{ heading }}</span>
+      <div style="flex:1;height:1px;background:var(--border)"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+      <sc-for list="{{ cards }}" as="c" hint-placeholder-count="5">
+        <a href="{{ c.href }}" style="position:relative;display:flex;flex-direction:column;gap:14px;padding:24px;background:var(--surface-raised);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow-sm);transition:transform .18s ease-out,box-shadow .18s ease-out" style-hover="transform:translateY(-3px);box-shadow:var(--shadow-md)">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint)">{{ c.kicker }}</span>
+            <span style="font-family:var(--font-mono);font-size:13px;color:var(--stamp)">{{ c.num }}</span>
+          </div>
+          <h3 style="font-family:var(--font-display);font-size:24px;margin:0;color:var(--text-strong)">{{ c.title }}</h3>
+          <p style="margin:0;font-size:14px;line-height:1.55;color:var(--text-muted)">{{ c.desc }}</p>
+          <sc-if value="{{ c.isHere }}" hint-placeholder-val="{{ false }}">
+            <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-top:2px">&bull; You&rsquo;re here</span>
+          </sc-if>
+          <sc-if value="{{ c.notHere }}" hint-placeholder-val="{{ true }}">
+            <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;color:var(--primary);margin-top:2px">{{ c.cta }} &rarr;</span>
+          </sc-if>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid var(--border);background:var(--surface);color:var(--text)">
+    <div style="max-width:1088px;margin:0 auto;padding:48px 24px 30px;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:36px">
+      <div style="display:flex;flex-direction:column;gap:16px;min-width:220px">
+        <a href="Home.dc.html" style="display:flex;align-items:center;gap:12px">
+          <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.Monogram" size="38" hint-size="38px,38px"></x-import>
+          <span style="font-family:var(--font-display);font-size:22px;color:var(--text-strong)">Mike Guerrero</span>
+        </a>
+        <p style="margin:0;font-size:14.5px;line-height:1.6;color:var(--text-muted);max-width:300px">Aspiring software engineer in San Diego. Building thoughtful things, one frame at a time.</p>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:4px">
+          <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.SocialLink" href="https://github.com/mikxvii" hint-size="110px,24px">GitHub</x-import>
+          <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.SocialLink" href="https://www.linkedin.com/in/mikxvii/" hint-size="110px,24px">LinkedIn</x-import>
+          <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.SocialLink" href="assets/mike_resume.pdf" hint-size="110px,24px">R&eacute;sum&eacute;</x-import>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint);margin-bottom:2px">Sections</span>
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="6">
+          <a href="{{ n.href }}" style="{{ n.style }}" style-hover="color:var(--primary)">{{ n.label }}</a>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint);margin-bottom:2px">Elsewhere</span>
+        <a href="https://github.com/mikxvii" target="_blank" style="font-size:15px;color:var(--text-muted)" style-hover="color:var(--primary)">GitHub &#8599;</a>
+        <a href="https://www.linkedin.com/in/mikxvii/" target="_blank" style="font-size:15px;color:var(--text-muted)" style-hover="color:var(--primary)">LinkedIn &#8599;</a>
+        <a href="assets/mike_resume.pdf" target="_blank" style="font-size:15px;color:var(--text-muted)" style-hover="color:var(--primary)">R&eacute;sum&eacute; &#8599;</a>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border)">
+      <div style="max-width:1088px;margin:0 auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint)">
+        <span>&copy; 2026 Mike Guerrero</span>
+        <span>Shot on 35mm &middot; Made in San Diego</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1088,&quot;height&quot;:760},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;experience&quot;,&quot;projects&quot;,&quot;photography&quot;,&quot;writings&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;heading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Explore&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  CARDS = [
+    { id:'about', num:'01', kicker:'Profile', title:'About', desc:'Who I am, what I care about, and how I got here.', cta:'Read on', href:'About.dc.html' },
+    { id:'experience', num:'02', kicker:'The Reel', title:'Experience', desc:'My roles and projects, projected frame by frame.', cta:'Roll the film', href:'Experience.dc.html' },
+    { id:'projects', num:'03', kicker:'The Crate', title:'Projects', desc:'A crate of work \u2014 flip a record to hear its story.', cta:'Dig in', href:'Projects.dc.html' },
+    { id:'photography', num:'04', kicker:'35mm', title:'Photography', desc:'Film frames from the Bay to the beach.', cta:'View strip', href:'Photography.dc.html' },
+    { id:'writings', num:'05', kicker:'Journal', title:'Writings', desc:'Notes and entries, kept like a paper journal.', cta:'Open the book', href:'Writings.dc.html' }
+  ];
+  NAV = [
+    { id:'home', label:'Home', href:'Home.dc.html' },
+    { id:'about', label:'About', href:'About.dc.html' },
+    { id:'experience', label:'Experience', href:'Experience.dc.html' },
+    { id:'projects', label:'Projects', href:'Projects.dc.html' },
+    { id:'photography', label:'Photography', href:'Photography.dc.html' },
+    { id:'writings', label:'Writings', href:'Writings.dc.html' }
+  ];
+  renderVals(){
+    const active = this.props.active || '';
+    return {
+      heading: this.props.heading || 'Explore',
+      cards: this.CARDS.map(c => ({ ...c, isHere: c.id === active, notHere: c.id !== active })),
+      nav: this.NAV.map(n => ({
+        label: n.label, href: n.href,
+        style: 'font-size:15px;color:' + (n.id === active ? 'var(--primary)' : 'var(--text-muted)')
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

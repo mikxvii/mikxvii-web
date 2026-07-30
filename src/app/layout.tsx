@@ -1,21 +1,35 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Serif_Display, Space_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const display = DM_Serif_Display({
+  variable: "--font-display",
+  weight: "400",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const sans = Space_Grotesk({
+  variable: "--font-sans",
+  subsets: ["latin"],
+});
+
+const mono = Space_Mono({
+  variable: "--font-mono",
+  weight: ["400", "700"],
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Mike Guerrero | Home",
-  description: "Mike Guerrero's personal website",
+  title: {
+    default: "Mike Guerrero",
+    template: "%s · Mike Guerrero",
+  },
+  description:
+    "Aspiring software engineer in San Diego — building thoughtful things, one frame at a time.",
 };
+
+// Applies the persisted theme before first paint to avoid a flash.
+const themeScript = `try{var t=localStorage.getItem('mg-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}`;
 
 export default function RootLayout({
   children,
@@ -23,13 +37,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body 
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${display.variable} ${sans.variable} ${mono.variable}`}>
         {children}
       </body>
     </html>

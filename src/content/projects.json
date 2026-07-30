@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "noso-labs",
+    "title": "NOSO Labs",
+    "short": "NOSO Labs",
+    "year": "2025",
+    "role": "Service call analysis dashboard",
+    "color": "#028391",
+    "blurb": "A call analysis dashboard for service teams: AssemblyAI transcribes the call, the OpenAI API scores compliance and surfaces sales insights, and a synchronized audio player pairs with a speaker color-coded transcript view.",
+    "tech": ["Next.js 15 + TypeScript", "AssemblyAI transcription", "OpenAI API analysis", "Firebase storage"],
+    "live": "",
+    "github": "https://github.com/mikxvii"
+  },
+  {
+    "slug": "jmg-workscape",
+    "title": "JMG WorkScape",
+    "short": "JMG WorkScape",
+    "year": "2024",
+    "role": "iOS app",
+    "color": "#BF5A3C",
+    "blurb": "A contractor invoicing, client management, and job navigation iOS app built in SwiftUI — featuring a custom Trie-based client lookup that made address search 90% faster and cut scheduling overhead for field contractors.",
+    "tech": ["SwiftUI", "Trie-based client lookup", "Invoicing & job navigation"],
+    "live": "",
+    "github": "https://github.com/mikxvii"
+  }
+]

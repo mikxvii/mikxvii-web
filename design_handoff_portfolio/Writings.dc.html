@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./ds-base.js"></script>
+<script>try{var t=localStorage.getItem('mg-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<style>
+@keyframes mg-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes mg-pageturn{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--link-hover)}
+</style>
+</helmet>
+<div style="min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--font-sans)">
+  <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:color-mix(in oklab,var(--bg) 80%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)">
+    <a href="Home.dc.html" style="display:flex;align-items:center;gap:12px">
+      <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.Monogram" size="36" hint-size="36px,36px"></x-import>
+      <span style="font-family:var(--font-display);font-size:19px;color:var(--text-strong)">Mike Guerrero</span>
+    </a>
+    <nav style="display:flex;align-items:center;gap:22px">
+      <a href="About.dc.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)" style-hover="color:var(--primary)">About</a>
+      <a href="Experience.dc.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)" style-hover="color:var(--primary)">Experience</a>
+      <a href="Projects.dc.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)" style-hover="color:var(--primary)">Projects</a>
+      <a href="Photography.dc.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)" style-hover="color:var(--primary)">Photography</a>
+      <a href="Writings.dc.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--primary)">Writings</a>
+      <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.ThemeToggle" theme="{{ theme }}" onChange="{{ onThemeChange }}" hint-size="72px,34px"></x-import>
+    </nav>
+  </header>
+
+  <section style="max-width:1000px;margin:0 auto;padding:56px 24px 8px;animation:mg-rise .6s ease-out both">
+    <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-faint)">05 &middot; Journal</span>
+    <h1 style="font-family:var(--font-display);font-size:clamp(40px,7vw,72px);line-height:1.03;margin:12px 0 12px;color:var(--text-strong)">The notebook</h1>
+    <p style="font-size:17px;line-height:1.65;color:var(--text-muted);max-width:520px;margin:0">Raw entries kept like a paper journal. Pick a chapter from the contents and read straight through.</p>
+  </section>
+
+  <section style="max-width:1000px;margin:0 auto;padding:26px 24px 96px">
+    <div style="position:relative;display:grid;grid-template-columns:300px 1fr;background:linear-gradient(180deg,#f8efd7,#efe3c3);border:1px solid var(--border-strong);border-radius:6px;box-shadow:0 30px 70px -32px rgba(60,40,20,.6);overflow:hidden">
+      <div aria-hidden="true" style="position:absolute;inset:0;background-image:var(--grain);mix-blend-mode:overlay;opacity:0.35;pointer-events:none"></div>
+      <div aria-hidden="true" style="position:absolute;left:300px;top:0;bottom:0;width:34px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(90,60,30,.14) 45%,rgba(90,60,30,.22) 50%,rgba(90,60,30,.14) 55%,transparent);pointer-events:none;z-index:2"></div>
+
+      <aside style="position:relative;padding:34px 26px;border-right:1px solid rgba(150,120,70,.35)">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px">
+          <h2 style="font-family:var(--font-display);font-size:26px;margin:0;color:#1a1206">Contents</h2>
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8a6b3a">by date &darr;</span>
+        </div>
+        <nav style="display:flex;flex-direction:column">
+          <sc-for list="{{ toc }}" as="e" hint-placeholder-count="5">
+            <button onClick="{{ e.go }}" style="{{ e.rowStyle }}">
+              <span style="display:flex;align-items:baseline;gap:10px;min-width:0">
+                <span style="font-family:var(--font-mono);font-size:12px;color:#bf5a3c;flex:0 0 auto">{{ e.label }}</span>
+                <span style="font-family:var(--font-display);font-size:16px;line-height:1.2;color:#2a2213;text-align:left">{{ e.title }}</span>
+              </span>
+              <span style="font-family:var(--font-mono);font-size:10.5px;color:#8a6b3a;margin-top:3px;padding-left:26px">{{ e.date }}</span>
+            </button>
+          </sc-for>
+        </nav>
+      </aside>
+
+      <article id="mg-reading" style="position:relative;padding:40px 46px 30px;min-height:560px;display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+          <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8a6b3a">{{ chapterLabel }}</span>
+          <span style="font-family:var(--font-mono);font-size:12px;color:#e2571a">{{ cur.date }}</span>
+        </div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,44px);line-height:1.05;margin:0 0 22px;color:#1a1206;max-width:18ch">{{ cur.title }}</h2>
+        <p style="margin:0 0 18px;font-size:16.5px;line-height:1.75;color:#3a2f1c">
+          <span style="float:left;font-family:var(--font-display);font-size:62px;line-height:.8;padding:6px 10px 0 0;color:#bf5a3c">{{ dropCap }}</span>{{ firstPara }}
+        </p>
+        <sc-for list="{{ restParas }}" as="p" hint-placeholder-count="2">
+          <p style="margin:0 0 18px;font-size:16.5px;line-height:1.75;color:#3a2f1c">{{ p }}</p>
+        </sc-for>
+        <div style="flex:1"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(150,120,70,.35)">
+          <button onClick="{{ prev }}" style="{{ prevStyle }}">&larr; Previous</button>
+          <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;color:#8a6b3a">{{ pageLabel }}</span>
+          <button onClick="{{ next }}" style="{{ nextStyle }}">Next &rarr;</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" active="writings" heading="Keep exploring" hint-size="100%,760px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { theme: (() => { try { return localStorage.getItem('mg-theme') || 'light'; } catch(e){ return 'light'; } })(), ch: 0 };
+  ROMAN = ['I','II','III','IV','V','VI','VII','VIII','IX','X'];
+  ENTRIES = [
+    { title:'On shipping small things', date:'07 \u00b7 2026', body:[
+      'The best advice I ever got was to make the thing smaller. Not worse \u2014 smaller. A weekend-sized version of the idea that actually reaches someone\u2019s hands beats the grand plan that never leaves the notebook.',
+      'Lately I try to end every project week with one thing shipped, however tiny: a fixed bug, a cleaner empty state, a page that loads a half-second faster. Momentum turns out to be mostly a stack of small, finished things.'] },
+    { title:'A love letter to 35mm', date:'05 \u00b7 2026', body:[
+      'There is something honest about a roll of film. You get thirty-six frames and no take-backs, so you slow down, you look longer, you wait for the light instead of forcing it.',
+      'I think that\u2019s why I keep shooting it, even though digital is easier in every measurable way. The constraint is the point. Good software feels the same when I get it right \u2014 fewer options, chosen carefully.'] },
+    { title:'Why I still buy records', date:'02 \u00b7 2026', body:[
+      'A record makes you commit to an album from start to finish. You can\u2019t skip without getting up, so you don\u2019t. You let side A play the way it was sequenced.',
+      'I like designing things that ask for that same kind of attention \u2014 a page you move through in order, on purpose, instead of one more infinite feed to thumb past.'] },
+    { title:'Notes from my first internship', date:'11 \u00b7 2025', body:[
+      'Week one I was terrified of the codebase. Week twelve I was still a little terrified, but I\u2019d learned the most useful skill there is: asking a clear question in public.',
+      'Nobody expected me to know everything. They did expect me to be honest about what I didn\u2019t, and to write it down so the next intern wouldn\u2019t have to guess.'] },
+    { title:'Learning in public', date:'08 \u00b7 2025', body:[
+      'I used to hide my half-finished work until it was perfect. It never got perfect \u2014 it just got old.',
+      'Now I try to put the rough version out early: this journal, my projects, the photos with a little too much grain. Turns out people are kind to a work in progress, and the feedback makes the finished thing better anyway.'] }
+  ];
+  componentDidUpdate(_p, prev){
+    if(prev.ch !== this.state.ch){
+      const el = document.getElementById('mg-reading');
+      if(el){ el.style.animation='none'; void el.offsetWidth; el.style.animation='mg-pageturn .5s ease-out'; }
+    }
+  }
+  renderVals(){
+    const n = this.ENTRIES.length;
+    const cur = this.ENTRIES[this.state.ch];
+    const body = cur.body || [''];
+    const first = body[0] || '';
+    const baseRow = 'display:flex;flex-direction:column;gap:0;text-align:left;background:transparent;border:none;border-bottom:1px dashed rgba(150,120,70,.4);padding:13px 8px 12px;cursor:pointer;transition:background .16s,padding-left .16s;font-family:inherit';
+    const btn = (on) => on
+      ? 'font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border-radius:999px;border:1px solid #bf5a3c;background:#bf5a3c;color:#f6ecd2;cursor:pointer'
+      : 'font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border-radius:999px;border:1px solid #cdb98a;background:transparent;color:#b7a271;cursor:not-allowed';
+    return {
+      theme: this.state.theme,
+      onThemeChange: (t) => { try { localStorage.setItem('mg-theme', t); } catch(e){} this.setState({ theme: t }); },
+      toc: this.ENTRIES.map((e, i) => ({
+        label: this.ROMAN[i], title: e.title, date: e.date,
+        go: () => this.setState({ ch: i }),
+        rowStyle: baseRow + (i === this.state.ch ? ';background:rgba(191,90,60,.12);padding-left:14px' : '')
+      })),
+      cur,
+      chapterLabel: 'Chapter ' + this.ROMAN[this.state.ch],
+      dropCap: first.charAt(0),
+      firstPara: first.slice(1),
+      restParas: body.slice(1),
+      pageLabel: 'Entry ' + (this.state.ch + 1) + ' of ' + n,
+      prev: () => this.setState(s => ({ ch: Math.max(0, s.ch - 1) })),
+      next: () => this.setState(s => ({ ch: Math.min(n - 1, s.ch + 1) })),
+      prevStyle: btn(this.state.ch > 0),
+      nextStyle: btn(this.state.ch < n - 1)
+    };
+  }
+}
+</script>
+</body>
+</html>

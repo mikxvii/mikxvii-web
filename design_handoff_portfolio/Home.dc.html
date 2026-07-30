@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<script src="./ds-base.js"></script>
+<script>try{var t=localStorage.getItem('mg-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<style>
+@keyframes mg-blink{50%{opacity:0}}
+@keyframes mg-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--link-hover)}
+</style>
+</helmet>
+<div style="min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--font-sans)">
+  <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:color-mix(in oklab,var(--bg) 80%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)">
+    <a href="Home.dc.html" style="display:flex;align-items:center;gap:12px">
+      <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.Monogram" size="36" hint-size="36px,36px"></x-import>
+      <span style="font-family:var(--font-display);font-size:19px;color:var(--text-strong)">Mike Guerrero</span>
+    </a>
+    <nav style="display:flex;align-items:center;gap:22px">
+      <a href="About.dc.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)" style-hover="color:var(--primary)">About</a>
+      <a href="Experience.dc.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)" style-hover="color:var(--primary)">Experience</a>
+      <a href="Projects.dc.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)" style-hover="color:var(--primary)">Projects</a>
+      <a href="Photography.dc.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)" style-hover="color:var(--primary)">Photography</a>
+      <a href="Writings.dc.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)" style-hover="color:var(--primary)">Writings</a>
+      <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.ThemeToggle" theme="{{ theme }}" onChange="{{ onThemeChange }}" hint-size="72px,34px"></x-import>
+    </nav>
+  </header>
+
+  <section style="position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:96px 24px 104px;min-height:600px">
+    <div aria-hidden="true" style="position:absolute;inset:0;background-image:url(assets/sf_sunset.jpg);background-size:cover;background-position:center 40%;opacity:0.6;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 30%,rgba(0,0,0,.55) 62%,rgba(0,0,0,.15) 84%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 30%,rgba(0,0,0,.55) 62%,rgba(0,0,0,.15) 84%,transparent 100%)"></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,color-mix(in oklab,var(--bg) 12%,transparent) 0%,color-mix(in oklab,var(--bg) 40%,transparent) 45%,color-mix(in oklab,var(--bg) 78%,transparent) 80%,var(--bg) 100%)"></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(120% 65% at 50% 52%,color-mix(in oklab,var(--bg) 42%,transparent) 0%,transparent 62%)"></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;background-image:var(--grain);mix-blend-mode:overlay;opacity:0.35"></div>
+    <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;max-width:660px;animation:mg-rise .7s ease-out both">
+      <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.MonoStamp" size="13" hint-size="200px,18px">SAN DIEGO, CA &middot; EST. 2025</x-import>
+      <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.Avatar" src="assets/mike.jpg" alt="Mike Guerrero" size="{{ avatarSize }}" ring="{{ true }}" hint-size="150px,150px"></x-import>
+      <h1 style="font-family:var(--font-display);font-size:clamp(40px,6vw,76px);line-height:1.02;margin:0;color:var(--text-strong)">Welcome, I&rsquo;m<br><span style="color:var(--primary)">Mike Guerrero</span><span style="color:var(--primary);font-family:var(--font-sans);font-weight:300;animation:mg-blink .9s step-end infinite;margin-left:2px" aria-hidden="true">|</span></h1>
+      <p style="font-size:18px;color:var(--text-muted);max-width:480px;margin:0;line-height:1.6">An aspiring software engineer in San Diego &mdash; building thoughtful things, one frame at a time. Pull up a chair and have a look around.</p>
+      <div style="display:flex;gap:28px;flex-wrap:wrap;justify-content:center;margin-top:6px">
+        <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.SocialLink" href="https://github.com/mikxvii" hint-size="120px,24px">My GitHub</x-import>
+        <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.SocialLink" href="https://www.linkedin.com/in/mikxvii/" hint-size="120px,24px">My LinkedIn</x-import>
+        <x-import component-from-global-scope="MikeGuerreroDesignSystem_88d503.SocialLink" href="assets/mike_resume.pdf" hint-size="120px,24px">My R&eacute;sum&eacute;</x-import>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" active="home" heading="Explore" hint-size="100%,760px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { theme: (() => { try { return localStorage.getItem('mg-theme') || 'light'; } catch(e){ return 'light'; } })() };
+  renderVals(){
+    return {
+      theme: this.state.theme,
+      avatarSize: 150,
+      onThemeChange: (t) => { try { localStorage.setItem('mg-theme', t); } catch(e){} this.setState({ theme: t }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
