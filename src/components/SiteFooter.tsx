@@ -47,8 +47,8 @@ export default function SiteFooter({
               </span>
             </Link>
             <p className="mg-footer-blurb">
-              Aspiring software engineer in San Diego. Building thoughtful things, one
-              frame at a time.
+              An aspiring software engineer in San Diego <br></br> Developing impactful solutions, one
+            frame at a time.
             </p>
             <div style={{ display: "flex", gap: 24, flexWrap: "wrap", marginTop: 4 }}>
               <SocialLink href={SOCIALS.github} icon="/github.svg">

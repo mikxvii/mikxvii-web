@@ -457,6 +457,16 @@ a:hover { color: var(--link-hover); }
   color: var(--text-faint);
 }
 .mg-fact-v { font-size: 14.5px; color: var(--text-strong); }
+.mg-cal-logo {
+  display: inline-block;
+  width: 46px;
+  height: 37px;
+  flex: 0 0 auto;
+  background-color: #041e42;
+  -webkit-mask: url("/images/site/cal.svg") no-repeat center / contain;
+  mask: url("/images/site/cal.svg") no-repeat center / contain;
+}
+[data-theme="dark"] .mg-cal-logo { background-color: #fdb515; }
 
 .mg-prose-lead {
   font-family: var(--font-display);

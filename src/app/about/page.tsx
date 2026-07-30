@@ -16,7 +16,22 @@ const FACTS = [
   { k: "Currently", v: "Building, learning" },
 ];
 
-const TAGS = ["TypeScript", "Javascript", "React", "React Native", "Next.js", "Node", "Design systems", "35mm film"];
+const TAGS = [
+  "TypeScript",
+  "React",
+  "React Three Fiber",
+  "Vite",
+  "Node",
+  "Python",
+  "Azure",
+  "Linux",
+  "AI agents",
+  "3D generation",
+  "35mm film",
+  "French cinema",
+  "Vinyl",
+  "Translation",
+];
 
 export default function AboutPage() {
   return (
@@ -34,7 +49,7 @@ export default function AboutPage() {
         <aside className="mg-about-aside">
           <div className="mg-portrait">
             <Image
-              src="/images/site/mike.jpg"
+              src="/images/site/IMG_0435.jpg"
               alt="Mike Guerrero"
               width={560}
               height={700}
@@ -51,35 +66,44 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+          <div
+            className="mg-facts"
+            style={{ flexDirection: "row", alignItems: "center", gap: 16 }}
+          >
+            <span className="mg-cal-logo" role="img" aria-label="Cal — UC Berkeley" />
+            <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              <span className="mg-fact-v">UC Berkeley</span>
+              <span className="mg-fact-k">B.A. Computer Science Minor in French &rsquo;26</span>
+            </div>
+          </div>
         </aside>
 
         <main style={{ display: "flex", flexDirection: "column", gap: 22, maxWidth: 640 }}>
           <p className="mg-prose-lead">
-            I&rsquo;m Mike — a software engineer from San Diego, fresh out of UC Berkeley,
-            who likes building things that feel warm, honest, and a little handmade.
+            My name is Mike, software engineer based in San Diego, UC
+            Berkeley alumnus.
           </p>
           <p className="mg-prose">
-            I studied computer science at Berkeley (with a French minor on the side),
-            where I led Mobile Developers of Berkeley and spent my time shipping real
-            products: admin dashboards and an MVP launch at Circuit, voice features for an
-            AI companion used by thousands at Athena AI Ventures, and secure login flows
-            for Salamati, an app serving 150k+ Afghan women.
+            I graduated from the University of California, Berkeley with a B.A. in Computer Science (and French minor on the side),
+            where I was President of the Mobile Developers of Berkeley. I spent my time with MDB shipping real
+            products: managed the deployment of Circuit Speed Dating&rsquo;s MVP, voice features for an
+            AI companion used by thousands at Athena AI Ventures, secure login flows
+            for Salamati, an app serving 150k+ Afghan women, etc.
           </p>
           <p className="mg-prose">
-            These days I&rsquo;m focused on full-stack and mobile work — TypeScript,
-            React and React Native, Next.js, SwiftUI — shipping interfaces that are
-            simple to understand and pleasant to sit in. I care a lot about the small
-            stuff: the timing of an animation, the weight of a typeface, the feeling you
-            get in the first three seconds of a page.
+            Recently I&rsquo;ve been focused on full-stack development — TypeScript,
+            React, Vite, Claude Code — shipping interfaces that are
+            simple to understand and satisfying to use. I have an eye for noticing the little
+            things: the timing of an animation, the weight of a typeface, the feeling that landing on a page produces.
           </p>
           <div className="mg-divider" />
-          <h2 className="mg-h2">When I&rsquo;m not at a keyboard</h2>
+          <h2 className="mg-h2">When I&rsquo;m AFK...</h2>
           <p className="mg-prose">
-            You&rsquo;ll find me shooting film around San Diego, digging through record
-            crates and vintage shops, deep in a good film or series, or chasing a sunset
-            from the Bay to the beach — probably switching between Spanish, French, and
-            English along the way. A lot of what I make online is just an attempt to
-            bottle a little of that feeling.
+            You can find me shooting film on my point and shoot, digging through record
+            stores and vintage shops, trying out new matcha flavors and exploring new films or shows. Whether I&rsquo;m chasing a sunset
+            from Diego to the Bay, switching between English, Spanish, and
+            French along the way, a lot of what I leave behind online is just my way of
+            bottling how I&rsquo;m feeling now.
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 8 }}>
             {TAGS.map((t) => (
