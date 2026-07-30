@@ -54,7 +54,14 @@ export default function Reel({ roles }: { roles: ExperienceRole[] }) {
               </div>
               <h2 className="mg-screen-role">{x.role}</h2>
               <p className="mg-screen-org">
-                <strong>{x.org}</strong> · {x.location}
+                {x.url ? (
+                  <a href={x.url} target="_blank" rel="noopener noreferrer">
+                    {x.org} ↗
+                  </a>
+                ) : (
+                  <strong>{x.org}</strong>
+                )}{" "}
+                · {x.location}
               </p>
               <ul className="mg-screen-points">
                 {x.points.map((p) => (

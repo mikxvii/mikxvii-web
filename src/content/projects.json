@@ -1,5 +1,29 @@
 [
   {
+    "slug": "mikxvii-web",
+    "title": "This Website",
+    "short": "This Website",
+    "year": "2026",
+    "role": "Design & build",
+    "color": "#FF5A1F",
+    "blurb": "The site you're on right now — a vintage, film-inspired portfolio built on Next.js 15. Every section carries a metaphor: a projector reel for experience, a record crate for projects, a 35mm strip for photos, and a paper notebook for writing.",
+    "tech": ["Next.js 15 + TypeScript", "CSS design tokens", "File-based content layer", "Claude Code"],
+    "live": "",
+    "github": "https://github.com/mikxvii/mikxvii-web"
+  },
+  {
+    "slug": "it-homelab",
+    "title": "IT Homelab",
+    "short": "IT Homelab",
+    "year": "2026",
+    "role": "Infrastructure lab",
+    "color": "#2BAF90",
+    "blurb": "A hands-on IT infrastructure lab built to sharpen sysadmin skills: Windows Server 2025 with Active Directory deployed on Microsoft Azure, plus Linux server administration — documented project by project.",
+    "tech": ["Windows Server 2025", "Active Directory", "Microsoft Azure", "Linux administration"],
+    "live": "",
+    "github": "https://github.com/mikxvii/it-homelab"
+  },
+  {
     "slug": "noso-labs",
     "title": "NOSO Labs",
     "short": "NOSO Labs",
@@ -8,8 +32,32 @@
     "color": "#028391",
     "blurb": "A call analysis dashboard for service teams: AssemblyAI transcribes the call, the OpenAI API scores compliance and surfaces sales insights, and a synchronized audio player pairs with a speaker color-coded transcript view.",
     "tech": ["Next.js 15 + TypeScript", "AssemblyAI transcription", "OpenAI API analysis", "Firebase storage"],
+    "live": "https://noso-takehome.vercel.app",
+    "github": "https://github.com/mikxvii/noso-takehome"
+  },
+  {
+    "slug": "movie-review-app",
+    "title": "Movie Review App",
+    "short": "Movie Review App",
+    "year": "2025",
+    "role": "iOS app",
+    "color": "#FAA968",
+    "blurb": "A movie review iOS app built in Swift during MDB's training program — browsing titles, writing reviews, and rating films from your pocket.",
+    "tech": ["Swift", "iOS", "MDB training program"],
     "live": "",
-    "github": "https://github.com/mikxvii"
+    "github": "https://github.com/mikxvii/MovieReviewApp"
+  },
+  {
+    "slug": "mdb-ios-training",
+    "title": "MDB iOS Training",
+    "short": "MDB iOS Training",
+    "year": "2025",
+    "role": "iOS coursework",
+    "color": "#F85525",
+    "blurb": "Exercises and builds from Mobile Developers of Berkeley's iOS training track — the reps behind the polished apps.",
+    "tech": ["Swift", "UIKit / SwiftUI", "Xcode"],
+    "live": "",
+    "github": "https://github.com/mikxvii/mdb-ios-training"
   },
   {
     "slug": "jmg-workscape",
@@ -21,6 +69,6 @@
     "blurb": "A contractor invoicing, client management, and job navigation iOS app built in SwiftUI — featuring a custom Trie-based client lookup that made address search 90% faster and cut scheduling overhead for field contractors.",
     "tech": ["SwiftUI", "Trie-based client lookup", "Invoicing & job navigation"],
     "live": "",
-    "github": "https://github.com/mikxvii"
+    "github": "https://github.com/mikxvii/JMGWorkScape"
   }
 ]

@@ -13,6 +13,8 @@ export interface ExperienceRole {
   stamp?: string;
   role: string;
   org: string;
+  /** Optional external link for the organization */
+  url?: string;
   location: string;
   points: string[];
   tags: string[];

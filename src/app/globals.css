@@ -567,6 +567,8 @@ a:hover { color: var(--link-hover); }
 }
 .mg-screen-org { margin: 0 0 20px; font-size: 16px; color: #6b5533; }
 .mg-screen-org strong { color: #bf5a3c; font-weight: 600; }
+.mg-screen-org a { color: #bf5a3c; font-weight: 600; }
+.mg-screen-org a:hover { color: #9c4529; text-decoration: underline; }
 .mg-screen-points {
   margin: 0 0 22px;
   padding: 0;

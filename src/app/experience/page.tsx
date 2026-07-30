@@ -23,7 +23,7 @@ export default function ExperiencePage() {
         <span className="mg-eyebrow">02 · The Reel</span>
         <h1 className="mg-page-h1">Experience, projected</h1>
         <p className="mg-page-sub" style={{ maxWidth: 520, margin: "0 auto" }}>
-          Every role is a scene. Scroll to roll the film — each one lights up on the
+          My roles, in a reel. Scroll to roll the film — each one lights up on the
           screen as it passes the projector.
         </p>
         <div
