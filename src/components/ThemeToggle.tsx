@@ -1,8 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 type Theme = "light" | "dark";
+
+// The <html data-theme> attribute (set pre-paint by the inline script in the
+// root layout) is the single source of truth; this store subscribes to it.
+function subscribe(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+  return () => observer.disconnect();
+}
+
+function getSnapshot(): Theme {
+  return document.documentElement.getAttribute("data-theme") === "dark"
+    ? "dark"
+    : "light";
+}
+
+function getServerSnapshot(): Theme {
+  return "light";
+}
 
 function applyTheme(t: Theme) {
   document.documentElement.setAttribute("data-theme", t);
@@ -13,17 +34,7 @@ function applyTheme(t: Theme) {
 
 /** Sun/moon segmented control; persists to localStorage['mg-theme']. */
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme | null>(null);
-
-  useEffect(() => {
-    const current = document.documentElement.getAttribute("data-theme");
-    setTheme(current === "dark" ? "dark" : "light");
-  }, []);
-
-  const set = (t: Theme) => {
-    setTheme(t);
-    applyTheme(t);
-  };
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   return (
     <div className="mg-theme-toggle" role="group" aria-label="Color theme">
@@ -32,7 +43,7 @@ export default function ThemeToggle() {
         className={theme === "light" ? "is-on" : ""}
         aria-pressed={theme === "light"}
         aria-label="Light theme"
-        onClick={() => set("light")}
+        onClick={() => applyTheme("light")}
       >
         ☀
       </button>
@@ -41,7 +52,7 @@ export default function ThemeToggle() {
         className={theme === "dark" ? "is-on" : ""}
         aria-pressed={theme === "dark"}
         aria-label="Dark theme"
-        onClick={() => set("dark")}
+        onClick={() => applyTheme("dark")}
       >
         ☾
       </button>

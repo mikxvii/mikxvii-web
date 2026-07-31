@@ -74,7 +74,7 @@ export function Avatar({
       height={size}
       priority={priority}
       className={`mg-avatar${ring ? " mg-avatar--ring" : ""}`}
-      style={{ width: size, height: size }}
+      style={{ width: `min(${size}px, 70vw)`, height: "auto", aspectRatio: "1 / 1" }}
     />
   );
 }
