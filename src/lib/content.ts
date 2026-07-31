@@ -73,6 +73,14 @@ export function getProjects(): Project[] {
 /* Photography                                                       */
 /* ----------------------------------------------------------------- */
 
+/** "07 · 25" / "07 · 2025" → timestamp; NaN when unparseable */
+function photoDateKey(date: string): number {
+  const m = date.match(/(\d{1,2})\s*·\s*(\d{2,4})/);
+  if (!m) return NaN;
+  const year = m[2].length <= 2 ? 2000 + Number(m[2]) : Number(m[2]);
+  return new Date(year, Number(m[1]) - 1, 1).getTime();
+}
+
 export function getPhotos(): Photo[] {
   const manifest = readJson<PhotoData[]>("photos.json", []);
   let files: string[] = [];
@@ -82,13 +90,12 @@ export function getPhotos(): Photo[] {
     files = [];
   }
   const inManifest = new Set(manifest.map((p) => p.file));
-  // Manifest defines order + metadata; any extra files dropped into the
-  // folder are appended with sensible defaults so they still show up.
+  // Manifest provides metadata; any extra files dropped into the folder get
+  // sensible defaults so they still show up.
   const all: PhotoData[] = [
     ...manifest.filter((p) => files.includes(p.file)),
     ...files
       .filter((f) => !inManifest.has(f))
-      .sort()
       .map((f) => ({
         file: f,
         caption: f.replace(IMAGE_EXT, "").replace(/[-_]+/g, " "),
@@ -96,11 +103,26 @@ export function getPhotos(): Photo[] {
         date: "",
       })),
   ];
-  return all.map((p, i) => ({
-    ...p,
-    src: `/images/photos/${p.file}`,
-    no: String(i + 1).padStart(2, "0"),
-  }));
+  // Newest first: sort by the date stamp; photos without one fall back to the
+  // file's modification time, so a fresh drop starts at the front of the roll
+  // until it's given a date in photos.json.
+  const sortKey = (p: PhotoData): number => {
+    const byDate = photoDateKey(p.date);
+    if (!Number.isNaN(byDate)) return byDate;
+    try {
+      return fs.statSync(path.join(PHOTOS_DIR, p.file)).mtimeMs;
+    } catch {
+      return 0;
+    }
+  };
+  return all
+    .map((p) => ({ p, key: sortKey(p) }))
+    .sort((a, b) => b.key - a.key)
+    .map(({ p }, i) => ({
+      ...p,
+      src: `/images/photos/${p.file}`,
+      no: String(i + 1).padStart(2, "0"),
+    }));
 }
 
 /* ----------------------------------------------------------------- */

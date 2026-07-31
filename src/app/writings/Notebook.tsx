@@ -30,11 +30,28 @@ export default function Notebook({ entries }: { entries: WritingEntry[] }) {
   if (entries.length === 0) {
     return (
       <div className="mg-book" style={{ gridTemplateColumns: "1fr" }}>
-        <article className="mg-reading" style={{ alignItems: "center", justifyContent: "center" }}>
-          <p className="mg-entry-para">
-            No entries yet — add a markdown file to src/content/writings or use /studio in
-            dev mode.
+        <div aria-hidden="true" className="mg-grain" style={{ opacity: 0.35, zIndex: 3 }} />
+        <article
+          className="mg-reading"
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            minHeight: 460,
+            gap: 10,
+          }}
+        >
+          <span className="mg-chapter-label">Chapter I</span>
+          <h2 className="mg-entry-title" style={{ margin: 0, maxWidth: "none" }}>
+            Blank pages, for now.
+          </h2>
+          <p className="mg-entry-para" style={{ margin: 0, maxWidth: "42ch" }}>
+            The first entries are still being written — the ink isn&rsquo;t dry yet. Check
+            back soon.
           </p>
+          <span className="mg-chapter-date" style={{ marginTop: 8 }}>
+            •&nbsp;•&nbsp;•
+          </span>
         </article>
       </div>
     );

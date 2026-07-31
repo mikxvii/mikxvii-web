@@ -5,8 +5,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
    sizing exact; files are local and lazy-loaded */
 import type { Project } from "@/lib/types";
 
-const GALLERY_SIZE = 3;
-
 export default function Crate({ projects }: { projects: Project[] }) {
   const [selected, setSelected] = useState<number | null>(null);
   const [flipped, setFlipped] = useState(false);
@@ -67,13 +65,13 @@ export default function Crate({ projects }: { projects: Project[] }) {
                   {p.cover ? (
                     <img src={p.cover} alt={`${p.title} cover`} loading="lazy" />
                   ) : (
-                    <div
-                      className="mg-cover-placeholder"
-                      style={{ background: p.color }}
-                    >
-                      <span>{p.title}</span>
-                      <span style={{ opacity: 0.65 }}>
-                        add cover.jpg to images/projects/{p.slug}
+                    <div className="mg-default-cover" style={{ background: p.color }}>
+                      <span className="mg-default-cover-kicker">
+                        Mike Guerrero Records
+                      </span>
+                      <span className="mg-default-cover-title">{p.title}</span>
+                      <span className="mg-default-cover-meta">
+                        {p.year} · {p.role}
                       </span>
                     </div>
                   )}
@@ -81,17 +79,36 @@ export default function Crate({ projects }: { projects: Project[] }) {
                   <div aria-hidden="true" className="mg-sleeve-edge" />
                 </div>
               </div>
-              <button type="button" className="mg-album-btn" onClick={() => open(i)}>
-                <span style={{ minWidth: 0 }}>
-                  <span className="mg-album-title">{p.title}</span>
-                  <span className="mg-album-meta">
-                    {p.year} · {p.role}
+              <div style={{ display: "flex", gap: 8, alignItems: "stretch" }}>
+                <button
+                  type="button"
+                  className="mg-album-btn"
+                  style={{ flex: 1, minWidth: 0 }}
+                  onClick={() => open(i)}
+                >
+                  <span style={{ minWidth: 0 }}>
+                    <span className="mg-album-title">{p.title}</span>
+                    <span className="mg-album-meta">
+                      {p.year} · {p.role}
+                    </span>
                   </span>
-                </span>
-                <span className="mg-album-play" aria-hidden="true">
-                  ▶
-                </span>
-              </button>
+                  <span className="mg-album-play" aria-hidden="true">
+                    ▶
+                  </span>
+                </button>
+                {p.live && p.live !== "#" && (
+                  <a
+                    href={p.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mg-album-ext"
+                    aria-label={`Open ${p.title} live site`}
+                    title="Open live project"
+                  >
+                    ↗
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -193,63 +210,63 @@ export default function Crate({ projects }: { projects: Project[] }) {
               </div>
             </div>
 
-            {/* Sleeve gallery */}
-            <div className="mg-gallery">
-              <div className="mg-gallery-head">
-                <span className="mg-gallery-label">Sleeve gallery — {sel.title}</span>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <button
-                    type="button"
-                    className="mg-round-btn"
-                    aria-label="Previous shot"
-                    onClick={() => setGal((g) => Math.max(0, g - 1))}
-                  >
-                    ←
-                  </button>
-                  <span className="mg-gallery-count">
-                    {gal + 1} / {GALLERY_SIZE}
-                  </span>
-                  <button
-                    type="button"
-                    className="mg-round-btn"
-                    aria-label="Next shot"
-                    onClick={() => setGal((g) => Math.min(GALLERY_SIZE - 1, g + 1))}
-                  >
-                    →
-                  </button>
-                </div>
-              </div>
-              <div className="mg-gallery-window">
-                <div
-                  className="mg-gallery-track"
-                  style={{ transform: `translateX(-${gal * 100}%)` }}
-                >
-                  {Array.from({ length: GALLERY_SIZE }, (_, i) => (
-                    <div key={i} className="mg-gallery-slide">
-                      {sel.shots[i] ? (
-                        <img src={sel.shots[i]} alt={`${sel.title} shot ${i + 1}`} loading="lazy" />
-                      ) : (
-                        <div className="mg-slide-placeholder">
-                          Shot {i + 1} — drop shot-{i + 1}.jpg into images/projects/{sel.slug}
-                        </div>
-                      )}
+            {/* Sleeve gallery — only when the project has shots */}
+            {sel.shots.length > 0 && (
+              <div className="mg-gallery">
+                <div className="mg-gallery-head">
+                  <span className="mg-gallery-label">Sleeve gallery — {sel.title}</span>
+                  {sel.shots.length > 1 && (
+                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      <button
+                        type="button"
+                        className="mg-round-btn"
+                        aria-label="Previous shot"
+                        onClick={() => setGal((g) => Math.max(0, g - 1))}
+                      >
+                        ←
+                      </button>
+                      <span className="mg-gallery-count">
+                        {gal + 1} / {sel.shots.length}
+                      </span>
+                      <button
+                        type="button"
+                        className="mg-round-btn"
+                        aria-label="Next shot"
+                        onClick={() => setGal((g) => Math.min(sel.shots.length - 1, g + 1))}
+                      >
+                        →
+                      </button>
                     </div>
-                  ))}
+                  )}
                 </div>
-                <div aria-hidden="true" className="mg-grain" style={{ opacity: 0.25 }} />
+                <div className="mg-gallery-window">
+                  <div
+                    className="mg-gallery-track"
+                    style={{ transform: `translateX(-${gal * 100}%)` }}
+                  >
+                    {sel.shots.map((shot, i) => (
+                      <div key={shot} className="mg-gallery-slide">
+                        <img src={shot} alt={`${sel.title} shot ${i + 1}`} loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                  <div aria-hidden="true" className="mg-grain" style={{ opacity: 0.25 }} />
+                </div>
+                {sel.shots.length > 1 && (
+                  <div className="mg-gallery-dots">
+                    {sel.shots.map((shot, i) => (
+                      <button
+                        key={shot}
+                        type="button"
+                        className={`mg-gallery-dot${i === gal ? " is-on" : ""}`}
+                        aria-label={`Go to shot ${i + 1}`}
+                        onClick={() => setGal(i)}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
-              <div className="mg-gallery-dots">
-                {Array.from({ length: GALLERY_SIZE }, (_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    className={`mg-gallery-dot${i === gal ? " is-on" : ""}`}
-                    aria-label={`Go to shot ${i + 1}`}
-                    onClick={() => setGal(i)}
-                  />
-                ))}
-              </div>
-            </div>
+            )}
           </div>
         </div>
       )}

@@ -23,7 +23,7 @@ export default function PhotographyPage() {
         style={{ paddingTop: 40, paddingBottom: 90, textAlign: "center" }}
       >
         <span className="mg-eyebrow" style={{ fontSize: 11 }}>
-          Kodak Gold 200 · Canon AE-1 · San Diego
+          Fuji DL-400 Tele QD
         </span>
       </section>
 

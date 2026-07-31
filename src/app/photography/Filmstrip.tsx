@@ -45,11 +45,11 @@ export default function Filmstrip({ photos }: { photos: Photo[] }) {
           <div>
             <span className="mg-eyebrow">04 · 35mm</span>
             <h1 className="mg-page-h1" style={{ marginBottom: 12 }}>
-              Shot on film
+              Life on film
             </h1>
             <p className="mg-page-sub" style={{ maxWidth: 520 }}>
-              A roll from the Bay to the beach. Scroll the strip sideways, or tap a frame
-              to blow it up.
+              A roll across the world (at least what I&rsquo;ve seen of it). Scroll the
+              strip sideways, or tap a frame to see more.
             </p>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -95,52 +95,28 @@ export default function Filmstrip({ photos }: { photos: Photo[] }) {
               </figcaption>
             </figure>
           ))}
-          {/* Trailing slot: drop a file into public/images/photos to extend the roll */}
+          {/* End-of-roll marker */}
           <div
             style={{
               scrollSnapAlign: "center",
               flex: "0 0 auto",
-              width: "min(50vw, 380px)",
-              padding: "0 10px",
+              padding: "0 48px 0 28px",
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            <div
+            <span
               style={{
-                aspectRatio: "4 / 3",
-                borderRadius: 4,
-                border: "1px dashed #3a3323",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                padding: 20,
-                color: "#7c7259",
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,
-                letterSpacing: "0.12em",
+                letterSpacing: "0.3em",
                 textTransform: "uppercase",
-                lineHeight: 1.8,
+                color: "#7c7259",
+                whiteSpace: "nowrap",
               }}
             >
-              Drop a photo into
-              <br />
-              public/images/photos
-            </div>
-            <p
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                letterSpacing: "0.12em",
-                color: "#b7a886",
-                textAlign: "center",
-                margin: "14px 0 0",
-              }}
-            >
-              ADD TO THE ROLL
-            </p>
+              — End of roll —
+            </span>
           </div>
         </div>
       </div>
