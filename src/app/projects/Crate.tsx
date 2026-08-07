@@ -1,8 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-/* eslint-disable @next/next/no-img-element -- plain img keeps the sleeve/gallery
-   sizing exact; files are local and lazy-loaded */
+import Image from "next/image";
 import type { Project } from "@/lib/types";
 
 export default function Crate({ projects }: { projects: Project[] }) {
@@ -63,7 +62,13 @@ export default function Crate({ projects }: { projects: Project[] }) {
                 <div aria-hidden="true" className="mg-vinyl" />
                 <div className="mg-sleeve">
                   {p.cover ? (
-                    <img src={p.cover} alt={`${p.title} cover`} loading="lazy" />
+                    <Image
+                      src={p.cover}
+                      alt={`${p.title} cover`}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 300px"
+                      style={{ objectFit: "cover" }}
+                    />
                   ) : (
                     <div className="mg-default-cover" style={{ background: p.color }}>
                       <span className="mg-default-cover-kicker">
@@ -246,7 +251,13 @@ export default function Crate({ projects }: { projects: Project[] }) {
                   >
                     {sel.shots.map((shot, i) => (
                       <div key={shot} className="mg-gallery-slide">
-                        <img src={shot} alt={`${sel.title} shot ${i + 1}`} loading="lazy" />
+                        <Image
+                          src={shot}
+                          alt={`${sel.title} shot ${i + 1}`}
+                          fill
+                          sizes="(max-width: 760px) 100vw, 900px"
+                          style={{ objectFit: "cover" }}
+                        />
                       </div>
                     ))}
                   </div>

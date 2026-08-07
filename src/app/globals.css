@@ -631,9 +631,14 @@ a:hover { color: var(--link-hover); }
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
 }
-@media (max-width: 420px) {
-  .mg-crate { padding: 24px 16px 20px; }
-  .mg-crate-grid { grid-template-columns: 1fr; }
+@media (max-width: 640px) {
+  .mg-crate { padding: 20px 12px 16px; }
+  .mg-crate-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .mg-album-btn { padding: 8px 10px; gap: 6px; }
+  .mg-album-title { font-size: 14px; }
+  .mg-album-meta { font-size: 9.5px; }
+  .mg-album-play { width: 24px; height: 24px; font-size: 10px; }
+  .mg-album-ext { width: 30px; font-size: 13px; }
 }
 .mg-album-art { position: relative; aspect-ratio: 1 / 1; perspective: 800px; }
 .mg-vinyl {
@@ -1104,6 +1109,11 @@ a:hover { color: var(--link-hover); }
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x proximity;
+  /* Without this, iOS Safari can't tell a tap from the start of a drag
+     inside a scroll-snapping container and hedges by cancelling the tap
+     (and can fight programmatic scrollBy() calls too). This tells it the
+     gesture is horizontal-only, so taps and the arrow buttons stay reliable. */
+  touch-action: pan-x;
   background: #0c0a06;
   border-top: 1px solid #1c150c;
   border-bottom: 1px solid #1c150c;
@@ -1124,6 +1134,7 @@ a:hover { color: var(--link-hover); }
   width: min(62vw, 560px);
   padding: 0 10px;
   cursor: pointer;
+  touch-action: manipulation; /* removes the ~300ms double-tap-zoom delay */
 }
 .mg-sprocket-row {
   height: 28px;
@@ -1184,6 +1195,27 @@ a:hover { color: var(--link-hover); }
   color: var(--text);
   font-size: 16px;
   cursor: pointer;
+  touch-action: manipulation;
+}
+@media (max-width: 640px) {
+  .mg-photo-frame { width: min(60vw, 260px); padding: 0 6px; }
+  .mg-sprocket-row { height: 16px; }
+  /* Same landscape shape as desktop (560/440), just scaled to the smaller
+     mobile width — height derives from width instead of an independent vh
+     guess, so the frame can't drift toward square/portrait. */
+  .mg-photo-window { height: auto; aspect-ratio: 560 / 440; }
+  .mg-photo-date { font-size: 11px; left: 10px; bottom: 8px; }
+  .mg-photo-no { font-size: 9px; right: 10px; top: 8px; }
+  /* Stack instead of side-by-side: a nowrap place label next to a title on a
+     ~250px card is how the two collide when either string runs long. */
+  .mg-photo-caption {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    padding: 8px 2px 16px;
+  }
+  .mg-photo-caption-title { font-size: 15px; line-height: 1.25; }
+  .mg-photo-caption-place { font-size: 9.5px; white-space: normal; }
 }
 
 /* Lightbox */
@@ -1215,8 +1247,8 @@ a:hover { color: var(--link-hover); }
 }
 .mg-lightbox-stage {
   position: relative;
-  max-width: min(1100px, 92vw);
-  max-height: 74vh;
+  max-width: min(1800px, 94vw);
+  max-height: 88vh;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -1233,14 +1265,27 @@ a:hover { color: var(--link-hover); }
   cursor: pointer;
 }
 .mg-lightbox-photo {
+  /* A plain wrapper around a normal in-flow <img> — it shrinks to fit its
+     content by basic box model, so the border always hugs the photo exactly.
+     No `fill`/absolute positioning here: those take the img out of flow, so
+     a box with nothing else in flow to size from (only aspect-ratio + a max
+     bound) has nothing to derive a size from and collapses to 0×0. */
   position: relative;
+  display: inline-block;
   border: 12px solid #0c0a06;
   box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8);
 }
 .mg-lightbox-photo img {
+  /* Intrinsic width/height are passed in scaled well past any realistic
+     display bound (see Filmstrip.tsx), so this max-width/max-height clamp
+     always engages — same "shrink to fit both bounds, keep ratio" algorithm
+     <img> has always used, just no longer capped at the source's real pixel
+     count. 124px reserved = 2 nav buttons (46) + 2 stage gaps (16). */
   display: block;
-  max-width: 78vw;
-  max-height: 66vh;
+  width: auto;
+  height: auto;
+  max-width: calc(min(1800px, 94vw) - 124px);
+  max-height: 82vh;
   object-fit: contain;
 }
 .mg-lightbox-date {
@@ -1261,8 +1306,23 @@ a:hover { color: var(--link-hover); }
   color: #b7a886;
 }
 @media (max-width: 640px) {
-  .mg-lightbox { padding: 16px; }
-  .mg-lightbox-nav { width: 38px; height: 38px; }
+  /* The stage is a [nav][photo][nav] row — every fixed-size sibling has to be
+     subtracted from the photo box's own width, or the buttons get pushed off
+     screen on narrow phones. Reserved here: outer padding (8*2) + stage gaps
+     (6*2) + nav buttons (32*2) = 92px. */
+  .mg-lightbox { padding: 10px 8px; gap: 8px; }
+  .mg-lightbox-stage { gap: 6px; max-height: 60vh; max-height: 60svh; }
+  .mg-lightbox-nav { width: 32px; height: 32px; font-size: 13px; }
+  .mg-lightbox-photo { border-width: 5px; }
+  .mg-lightbox-photo img {
+    max-width: calc(100vw - 92px);
+    max-height: 52vh;
+    max-height: 52svh;
+  }
+  .mg-lightbox-close { top: 10px; right: 10px; width: 32px; height: 32px; font-size: 15px; }
+  .mg-lightbox-date { font-size: 11px; left: 10px; bottom: 8px; }
+  .mg-lightbox-caption { font-size: 18px; }
+  .mg-lightbox-place { font-size: 10.5px; margin-top: 4px; }
 }
 
 /* ---------------------------------------------------------------------------

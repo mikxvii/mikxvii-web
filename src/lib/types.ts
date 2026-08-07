@@ -56,6 +56,9 @@ export interface Photo extends PhotoData {
   src: string;
   /** Frame number, e.g. "01" */
   no: string;
+  /** Read at build time — sizes the lightbox border to hug the photo exactly */
+  width: number;
+  height: number;
 }
 
 export interface WritingEntry {

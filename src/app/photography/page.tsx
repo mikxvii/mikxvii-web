@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: "Film frames from the Bay to the beach.",
 };
 
-export default function PhotographyPage() {
-  const photos = getPhotos();
+export default async function PhotographyPage() {
+  const photos = await getPhotos();
 
   return (
     <div className="mg-page">

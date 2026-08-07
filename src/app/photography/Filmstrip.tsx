@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-/* eslint-disable @next/next/no-img-element -- exact-fit filmstrip/lightbox media */
+import Image from "next/image";
 import type { Photo } from "@/lib/types";
 
 export default function Filmstrip({ photos }: { photos: Photo[] }) {
@@ -83,7 +83,14 @@ export default function Filmstrip({ photos }: { photos: Photo[] }) {
             <figure key={f.src} className="mg-photo-frame" onClick={() => setLb(i)}>
               <div aria-hidden="true" className="mg-sprocket-row" />
               <div className="mg-photo-window">
-                <img src={f.src} alt={f.caption} loading={i < 2 ? "eager" : "lazy"} />
+                <Image
+                  src={f.src}
+                  alt={f.caption}
+                  fill
+                  sizes="(max-width: 640px) 60vw, 560px"
+                  style={{ objectFit: "cover" }}
+                  priority={i < 2}
+                />
                 <div aria-hidden="true" className="mg-grain" style={{ opacity: 0.4 }} />
                 {f.date && <div className="mg-photo-date">{f.date}</div>}
                 <div className="mg-photo-no">FRAME {f.no}</div>
@@ -136,7 +143,19 @@ export default function Filmstrip({ photos }: { photos: Photo[] }) {
               ←
             </button>
             <div className="mg-lightbox-photo">
-              <img src={cur.src} alt={cur.caption} />
+              <Image
+                src={cur.src}
+                alt={cur.caption}
+                // Scaled well past any realistic display size (see the CSS
+                // comment on .mg-lightbox-photo img) so the max-width/height
+                // clamp always engages instead of capping out at the source
+                // photo's real resolution — ratio is unchanged either way.
+                width={cur.width * 5}
+                height={cur.height * 5}
+                sizes="(max-width: 640px) calc(100vw - 92px), calc(94vw - 124px)"
+                style={{ display: "block", width: "auto", height: "auto", objectFit: "contain" }}
+                priority
+              />
               <div aria-hidden="true" className="mg-grain" style={{ opacity: 0.35 }} />
               {cur.date && <div className="mg-lightbox-date">{cur.date}</div>}
             </div>

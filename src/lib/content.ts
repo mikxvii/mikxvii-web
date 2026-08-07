@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import sharp from "sharp";
 import type {
   ExperienceRole,
   Photo,
@@ -81,7 +82,19 @@ function photoDateKey(date: string): number {
   return new Date(year, Number(m[1]) - 1, 1).getTime();
 }
 
-export function getPhotos(): Photo[] {
+// Fallback used only if a file can't be read (corrupt/missing) — keeps the
+// lightbox border sane instead of throwing at build time.
+const FALLBACK_RATIO = { width: 3, height: 2 };
+
+async function photoAspect(file: string): Promise<{ width: number; height: number }> {
+  try {
+    const meta = await sharp(path.join(PHOTOS_DIR, file)).metadata();
+    if (meta.width && meta.height) return { width: meta.width, height: meta.height };
+  } catch {}
+  return FALLBACK_RATIO;
+}
+
+export async function getPhotos(): Promise<Photo[]> {
   const manifest = readJson<PhotoData[]>("photos.json", []);
   let files: string[] = [];
   try {
@@ -90,39 +103,51 @@ export function getPhotos(): Photo[] {
     files = [];
   }
   const inManifest = new Set(manifest.map((p) => p.file));
-  // Manifest provides metadata; any extra files dropped into the folder get
-  // sensible defaults so they still show up.
-  const all: PhotoData[] = [
-    ...manifest.filter((p) => files.includes(p.file)),
-    ...files
-      .filter((f) => !inManifest.has(f))
-      .map((f) => ({
-        file: f,
-        caption: f.replace(IMAGE_EXT, "").replace(/[-_]+/g, " "),
-        place: "San Diego",
-        date: "",
-      })),
-  ];
-  // Newest first: sort by the date stamp; photos without one fall back to the
-  // file's modification time, so a fresh drop starts at the front of the roll
-  // until it's given a date in photos.json.
+  // Manifest order IS the curated order for undated photos — see the note
+  // below on why we don't fall back to file mtime.
+  const manifestPhotos = manifest.filter((p) => files.includes(p.file));
+  // Files dropped into the folder but not yet catalogued in photos.json get
+  // sensible defaults so they still show up, appended after the curated set.
+  const uncatalogued = files
+    .filter((f) => !inManifest.has(f))
+    .sort()
+    .map((f) => ({
+      file: f,
+      caption: f.replace(IMAGE_EXT, "").replace(/[-_]+/g, " "),
+      place: "San Diego",
+      date: "",
+    }));
+  const all: PhotoData[] = [...manifestPhotos, ...uncatalogued];
+
+  // Newest first: sort by the date stamp; undated photos fall back to their
+  // position in photos.json — NOT file mtime. mtime can't be trusted here:
+  // every `git clone`/checkout (including Vercel's, on every single deploy)
+  // resets all file mtimes to the checkout moment, so an mtime-based sort
+  // would silently scramble back to alphabetical on the next deploy. Manifest
+  // order is committed data, so it's stable forever.
+  const manifestIndex = new Map(all.map((p, i) => [p.file, i]));
+  // Bigger than any realistic date field (year ~2286 in epoch ms), so the
+  // whole undated group floats above dated photos — "just added" outranks
+  // "dated 2025" until you give it a real date, same as the old behavior.
+  const UNDATED_BASE = 1e15;
   const sortKey = (p: PhotoData): number => {
     const byDate = photoDateKey(p.date);
     if (!Number.isNaN(byDate)) return byDate;
-    try {
-      return fs.statSync(path.join(PHOTOS_DIR, p.file)).mtimeMs;
-    } catch {
-      return 0;
-    }
+    return UNDATED_BASE - (manifestIndex.get(p.file) ?? 0);
   };
-  return all
+  const sorted = all
     .map((p) => ({ p, key: sortKey(p) }))
     .sort((a, b) => b.key - a.key)
-    .map(({ p }, i) => ({
+    .map((x) => x.p);
+
+  return Promise.all(
+    sorted.map(async (p, i) => ({
       ...p,
       src: `/images/photos/${p.file}`,
       no: String(i + 1).padStart(2, "0"),
-    }));
+      ...(await photoAspect(p.file)),
+    }))
+  );
 }
 
 /* ----------------------------------------------------------------- */
