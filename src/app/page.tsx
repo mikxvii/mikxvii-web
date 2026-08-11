@@ -1,5 +1,6 @@
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import ResumeMenu from "@/components/ResumeMenu";
 import { Avatar, SocialLink } from "@/components/ui";
 import { SOCIALS } from "@/lib/site";
 
@@ -43,9 +44,7 @@ export default function Home() {
             <SocialLink href={SOCIALS.linkedin} icon="/linkedin.svg">
               LinkedIn
             </SocialLink>
-            <SocialLink href={SOCIALS.resume} icon="/file.svg">
-              Résumé
-            </SocialLink>
+            <ResumeMenu variant="social" />
           </div>
         </div>
       </section>

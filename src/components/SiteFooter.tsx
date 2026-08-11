@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { SectionId } from "@/lib/types";
 import { NAV, SECTION_CARDS, SOCIALS } from "@/lib/site";
 import { Monogram, SocialLink } from "./ui";
+import ResumeMenu from "./ResumeMenu";
 
 /** Explore cards + site footer, rendered at the bottom of every page. */
 export default function SiteFooter({
@@ -57,9 +58,7 @@ export default function SiteFooter({
               <SocialLink href={SOCIALS.linkedin} icon="/linkedin.svg">
                 LinkedIn
               </SocialLink>
-              <SocialLink href={SOCIALS.resume} icon="/file.svg">
-                Résumé
-              </SocialLink>
+              <ResumeMenu variant="social" />
             </div>
           </div>
           <div className="mg-footer-col">
@@ -92,14 +91,7 @@ export default function SiteFooter({
             >
               LinkedIn ↗
             </a>
-            <a
-              href={SOCIALS.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mg-footer-link"
-            >
-              Résumé ↗
-            </a>
+            <ResumeMenu variant="link" />
           </div>
         </div>
         <div className="mg-footer-bottom">

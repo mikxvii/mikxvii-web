@@ -3,8 +3,19 @@ import type { SectionId } from "./types";
 export const SOCIALS = {
   github: "https://github.com/mikxvii",
   linkedin: "https://www.linkedin.com/in/mikxvii/",
-  resume: "/mike_resume.pdf",
 };
+
+export interface ResumeOption {
+  id: "swe" | "it" | "general";
+  label: string;
+  href: string;
+}
+
+export const RESUMES: ResumeOption[] = [
+  { id: "swe", label: "SWE Résumé", href: "/resume_swe.pdf" },
+  { id: "it", label: "IT Résumé", href: "/resume_it.pdf" },
+  { id: "general", label: "General Résumé", href: "/resume_general.pdf" },
+];
 
 export interface SectionCard {
   id: Exclude<SectionId, "home">;

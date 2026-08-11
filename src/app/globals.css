@@ -323,6 +323,49 @@ a:hover { color: var(--link-hover); }
 .mg-social img { width: 18px; height: 18px; display: inline-block; }
 [data-theme="dark"] .mg-social img { filter: invert(0.85) sepia(0.3); }
 
+.mg-resume-menu { position: relative; display: inline-flex; }
+.mg-resume-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+}
+.mg-resume-caret {
+  display: inline-block;
+  font-size: 9px;
+  transition: transform 0.16s ease-out;
+  transform: translateY(1px);
+}
+.mg-resume-caret.is-open { transform: translateY(1px) rotate(180deg); }
+.mg-resume-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 60;
+  min-width: 168px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  animation: mg-fade 0.14s ease-out both;
+}
+.mg-resume-item {
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  white-space: nowrap;
+}
+.mg-resume-item:hover { background: var(--surface-sunk); color: var(--primary); }
+
 .mg-avatar {
   border-radius: 50%;
   object-fit: cover;
@@ -337,7 +380,6 @@ a:hover { color: var(--link-hover); }
 --------------------------------------------------------------------------- */
 .mg-hero {
   position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
